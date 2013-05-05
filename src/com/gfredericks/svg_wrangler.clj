@@ -20,3 +20,23 @@
 (defn circle
   [cx cy r attrs]
   (elem :circle (assoc attrs :cx cy :cy cy :r r)))
+
+;;
+;; CLJS hax
+;;
+
+(def double identity)
+(defn elem
+  [tagname attrs]
+  [(-> tagname
+       name
+       (->> (str "svg:"))
+       keyword)
+   (update-in attrs [:style] css)])
+
+(defn svg*
+  [[minx miny user-width user-height :as dims] width height contents]
+  [:svg:svg {:xmlns "http://www.w3.org/2000/svg" :version "1.1"
+             :viewBox (apply format "%f %f %f %f" (map double dims))
+             :style (format "width:%dpx;height:%dpx;" width height)}
+   contents])
