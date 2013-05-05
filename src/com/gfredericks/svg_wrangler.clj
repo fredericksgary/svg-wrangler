@@ -12,3 +12,11 @@
          :viewBox (apply format "%f %f %f %f" (map double dims))
          :style (format "width:%dpx;height:%dpx;" width height)}
    contents])
+
+(defn elem
+  [tagname attrs]
+  [tagname (update-in attrs [:style] css)])
+
+(defn circle
+  [cx cy r attrs]
+  (elem :circle (assoc attrs :cx cy :cy cy :r r)))
