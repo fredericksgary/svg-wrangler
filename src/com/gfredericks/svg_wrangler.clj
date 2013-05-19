@@ -34,7 +34,7 @@
      [tagname (set-style attrs) contents]))
 
 (defn circle
-  ([cx cy r] (circle cx cy r) {})
+  ([cx cy r] (circle cx cy r {}))
   ([cx cy r attrs]
      (elem :circle (assoc-locals attrs cx cy r))))
 
