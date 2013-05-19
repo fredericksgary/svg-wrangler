@@ -35,7 +35,7 @@
 
 (defn circle
   [cx cy r attrs]
-  (elem :circle (assoc-locals attrs cy cy r)))
+  (elem :circle (assoc-locals attrs cx cy r)))
 
 (defn polyline
   [points attrs]
