@@ -34,17 +34,26 @@
      [tagname (set-style attrs) contents]))
 
 (defn circle
-  [cx cy r attrs]
-  (elem :circle (assoc-locals attrs cx cy r)))
+  ([cx cy r] (circle cx cy r) {})
+  ([cx cy r attrs]
+     (elem :circle (assoc-locals attrs cx cy r))))
+
+(defn line
+  ([x1 y1 x2 y2] (line x1 y1 x2 y2 {}))
+  ([x1 y1 x2 y2 attrs]
+     (elem :line (assoc-locals attrs x1 y1 x2 y2))))
 
 (defn polyline
-  [points attrs]
-  (elem :polyline (assoc attrs :points (points-str " " points))))
+  ([points] (polyline points {}))
+  ([points attrs]
+     (elem :polyline (assoc attrs :points (points-str " " points)))))
 
 (defn rect
-  [x y width height attrs]
-  (elem :rect (assoc-locals attrs x y width height)))
+  ([x y width height] (rect x y width height {}))
+  ([x y width height attrs]
+     (elem :rect (assoc-locals attrs x y width height))))
 
 (defn text
-  [x y val attrs]
-  (elem :text (assoc-locals attrs x y) val))
+  ([x y val] (text x y val {}))
+  ([x y val attrs]
+     (elem :text (assoc-locals attrs x y) val)))
