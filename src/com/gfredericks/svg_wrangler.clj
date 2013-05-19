@@ -1,10 +1,20 @@
 (ns com.gfredericks.svg-wrangler
   (:require [clojure.string :as s]))
 
+(defmacro assoc-locals
+  [x & names]
+  `(assoc ~x ~@(mapcat (juxt keyword identity) names)))
+
 (defn css
   [m]
   (s/join (for [[k v] m]
             (format "%s:%s;" (name k) (str v)))))
+
+(defn set-style
+  [attrs]
+  (cond-> attrs
+          (map? (:style attrs))
+          (update-in [:style] css)))
 
 (defn svg*
   [[minx miny user-width user-height :as dims] width height contents]
@@ -13,10 +23,28 @@
          :style (format "width:%dpx;height:%dpx;" width height)}
    contents])
 
+(defn ^:private points-str
+  [sep points]
+  (s/join sep (for [[x y] points] (str (double x) \, (double y)))))
+
 (defn elem
-  [tagname attrs]
-  [tagname (update-in attrs [:style] css)])
+  ([tagname attrs]
+     [tagname (set-style attrs)])
+  ([tagname attrs contents]
+     [tagname (set-style attrs) contents]))
 
 (defn circle
   [cx cy r attrs]
-  (elem :circle (assoc attrs :cx cy :cy cy :r r)))
+  (elem :circle (assoc-locals attrs cy cy r)))
+
+(defn polyline
+  [points attrs]
+  (elem :polyline (assoc attrs :points (points-str " " points))))
+
+(defn rect
+  [x y width height attrs]
+  (elem :rect (assoc-locals attrs x y width height)))
+
+(defn text
+  [x y val attrs]
+  (elem :text (assoc-locals attrs x y) val))
