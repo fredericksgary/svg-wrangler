@@ -16,10 +16,10 @@
                    :output-path "target/generated/cljs"
                    :rules :cljs}]}
   :cljsbuild {
-              :builds [{:source-paths ["target/generated/cljs" "target/generated/clj"]
+              :builds [{:source-paths ["target/generated/cljs" "src/clj"]
                         :compiler {
                                    :output-to "main.js"
                                    :optimizations :whitespace
                                    :pretty-print true}}]
               :jar true}
-  :hooks [cljx.hooks])
+  :hooks [cljx.hooks leiningen.cljsbuild])
