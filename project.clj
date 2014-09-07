@@ -1,4 +1,4 @@
-(defproject com.gfredericks/svg-wrangler "0.1.4"
+(defproject com.gfredericks/svg-wrangler "0.1.5-SNAPSHOT"
   :description "Helpers for doing svg-hiccup."
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
