@@ -57,3 +57,10 @@
   ([x y val] (text x y val {}))
   ([x y val attrs]
      (elem :text (assoc-locals attrs x y) val)))
+
+(defn group
+  "If the first arg is a map it is applied as attributes."
+  [& contents]
+  (if (map? (first contents))
+    (elem :g (first contents) (rest contents))
+    (elem :g {} contents)))
