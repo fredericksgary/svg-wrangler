@@ -3,7 +3,7 @@
 svg-wrangler is a collection of Clojure functions to help assemble SVG
 images via hiccup data structures.
 
-## Obtainage
+## Obtention
 
 [![version](https://clojars.org/com.gfredericks/svg-wrangler/latest-version.svg)](https://clojars.org/com.gfredericks/svg-wrangler)
 
