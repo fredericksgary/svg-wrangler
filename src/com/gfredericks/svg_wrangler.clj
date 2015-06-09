@@ -20,7 +20,8 @@
   [[minx miny user-width user-height :as dims] width height contents]
   [:svg {:xmlns "http://www.w3.org/2000/svg" :version "1.1"
          :viewBox (apply format "%f %f %f %f" (map double dims))
-         :style (format "width:%dpx;height:%dpx;" width height)}
+         :width (format "%dpx" width)
+         :height (format "%dpx" height)}
    contents])
 
 (defn ^:private points-str
